@@ -4,13 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-<<<<<<< HEAD
     <groupId>ru.vsu</groupId>
     <artifactId>bigdata-course</artifactId>
-    <version>1.0-SNAPSHOT</version>
-=======
-    <groupId>ru.vsu.bigdata</groupId>
-    <artifactId>bigdata-school</artifactId>
     <version>1.0</version>
     <packaging>pom</packaging>
 
@@ -18,7 +13,6 @@
         <module>bigdata-school-task1</module>
         <module>bigdata-school-task2</module>
     </modules>
->>>>>>> b9d100892c905bcee3054d24d624dedb78e94ba0
 
     <dependencies>
         <dependency>
@@ -39,16 +33,6 @@
             <classifier>hadoop2</classifier>
             <!--<scope>test</scope>-->
         </dependency>
-<<<<<<< HEAD
-
     </dependencies>
 
-
-=======
-    </dependencies>
-
-
-
-
->>>>>>> b9d100892c905bcee3054d24d624dedb78e94ba0
 </project>
