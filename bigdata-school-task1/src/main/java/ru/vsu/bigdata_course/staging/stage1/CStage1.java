@@ -14,9 +14,8 @@ public class CStage1 extends Reducer<Text, Pokemon, Text, Iterable<Pokemon>> {
     {
         LinkedList<Pokemon> pokemons = new LinkedList<Pokemon>();
 
-        while (values.iterator().hasNext())
-        {
-            pokemons.add(values.iterator().next());
+        for(Pokemon p: values) {
+            pokemons.add(p);
         }
         try {
             context.write(key, pokemons);
