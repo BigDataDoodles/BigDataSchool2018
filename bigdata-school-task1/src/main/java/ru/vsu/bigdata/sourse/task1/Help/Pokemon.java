@@ -2,18 +2,18 @@ package ru.vsu.bigdata.sourse.task1.Help;
 
 public class Pokemon {
 
-    private int HP;
-    private int attack;
-    private int def;
-    private int speed;
+    private double HP;
+    private double attack;
+    private double def;
+    private double speed;
     private String name;
 
     /**
-     *
+     * Получение характеристик покемона
      * @param i
      * @return Hp если i = 0; attak если i = 1; defend если i = 2; speed если i = 3;
      */
-    public int getCharactiristics(int i){
+    public double getCharactiristics(int i){
         switch (i){
             case 0: return HP;
             case 1: return attack;
@@ -23,11 +23,23 @@ public class Pokemon {
         return -1;
     }
 
+    /**
+     * Получение имени покемона
+     * @return
+     */
     public String getName(){
         return name;
     }
 
-    public void setCharactiristic(int HP,int attack,int def,int speed,String name){
+    /**
+     * Задание статистик
+     * @param HP health
+     * @param attack attack
+     * @param def defence
+     * @param speed speed
+     * @param name name
+     */
+    public void setCharactiristic(double HP,double attack,double def,double speed,String name){
         this.HP = HP;
         this.attack = attack;
         this.def = def;
@@ -35,7 +47,12 @@ public class Pokemon {
         this.name = name;
     }
 
-    public void setCharactitistic(int key, int value){
+    /**
+     * перегрузка функции задания характеристик
+     * @param key ключ по которому мы выставляем характеристики
+     * @param value значение
+     */
+    public void setCharactitistic(int key, double value){
         switch (key){
             case 0: {HP = value; break;}
             case 1: {attack = value; break;}
@@ -44,6 +61,10 @@ public class Pokemon {
         }
     }
 
+    /**
+     * Перегрузка функции задачи характиристик. Задание имени
+     * @param name
+     */
     public void setCharactiristic(String name){
         this.name = name;
     }

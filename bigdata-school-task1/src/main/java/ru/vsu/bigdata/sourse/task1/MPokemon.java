@@ -17,9 +17,11 @@ public class MPokemon extends Mapper<NullWritable,Text,Text,Text>{
             if(i == 1){
                 first = row[i];
             }else {
-                if (i == row.length-1)
+                if (i != row.length-1){
+                    second += row[i] + ",";
+                }else {
                     second += row[i];
-                second += row[i] + ",";
+                }
             }
         }
         context.write(new Text(first),new Text(second));

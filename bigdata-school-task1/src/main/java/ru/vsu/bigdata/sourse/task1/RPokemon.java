@@ -15,36 +15,34 @@ public class RPokemon extends Reducer<Text,Text,Text,Text>{
         Pokemon feeble = new Pokemon();
         Pokemon defender = new Pokemon();
         Pokemon slowpoke = new Pokemon();
-        Iterator<Text> iterator = values.iterator();
-        while (iterator.hasNext()){
-            String[] characteristics = iterator.next().toString().split(",");
-            //первичное приближение
-            tank.setCharactiristic(Integer.parseInt(characteristics[1]),Integer.parseInt(characteristics[2]),
-                    Integer.parseInt(characteristics[5]),Integer.parseInt(characteristics[6]),characteristics[0]);
-            feeble.setCharactiristic(Integer.parseInt(characteristics[1]),Integer.parseInt(characteristics[2]),
-                    Integer.parseInt(characteristics[5]),Integer.parseInt(characteristics[6]),characteristics[0]);
-            defender.setCharactiristic(Integer.parseInt(characteristics[1]),Integer.parseInt(characteristics[2]),
-                    Integer.parseInt(characteristics[5]),Integer.parseInt(characteristics[6]),characteristics[0]);
-            slowpoke.setCharactiristic(Integer.parseInt(characteristics[1]),Integer.parseInt(characteristics[2]),
-                    Integer.parseInt(characteristics[5]),Integer.parseInt(characteristics[6]),characteristics[0]);
+
+        //первичное приближение
+        tank.setCharactiristic(20,100,20,100,"example");
+        feeble.setCharactiristic(20,100,20,100,"example");
+        defender.setCharactiristic(20,100,20,100,"example");
+        slowpoke.setCharactiristic(20,100,20,100,"example");
+
+        for(Text str: values) {
+            String[] characteristics = str.toString().split(",");
+
             //нахождение нужных нам коэффициентов скорости, атаки, и т.д.
-            if(tank.getCharactiristics(0) < Integer.parseInt(characteristics[1])){
-                tank.setCharactitistic(0,Integer.parseInt(characteristics[1]));
+            if (tank.getCharactiristics(0) < Double.parseDouble(characteristics[1])) {
+                tank.setCharactitistic(0, Double.parseDouble(characteristics[1]));
                 tank.setCharactiristic(characteristics[0]);
             }
 
-            if(feeble.getCharactiristics(1) > Integer.parseInt(characteristics[2])){
-                feeble.setCharactitistic(1,Integer.parseInt(characteristics[2]));
+            if (feeble.getCharactiristics(1) > Double.parseDouble(characteristics[2])) {
+                feeble.setCharactitistic(1, Double.parseDouble(characteristics[2]));
                 feeble.setCharactiristic(characteristics[0]);
             }
 
-            if(defender.getCharactiristics(2) < Integer.parseInt(characteristics[5])){
-                defender.setCharactitistic(2,Integer.parseInt(characteristics[5]));
+            if (defender.getCharactiristics(2) < Double.parseDouble(characteristics[5])) {
+                defender.setCharactitistic(2, Double.parseDouble(characteristics[5]));
                 defender.setCharactiristic(characteristics[0]);
             }
 
-            if(slowpoke.getCharactiristics(3) < Integer.parseInt(characteristics[6])){
-                slowpoke.setCharactitistic(3,Integer.parseInt(characteristics[6]));
+            if (slowpoke.getCharactiristics(3) < Double.parseDouble(characteristics[6])) {
+                slowpoke.setCharactitistic(3, Double.parseDouble(characteristics[6]));
                 slowpoke.setCharactiristic(characteristics[0]);
             }
 
