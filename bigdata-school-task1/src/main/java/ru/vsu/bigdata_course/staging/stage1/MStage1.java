@@ -11,7 +11,7 @@ public class MStage1 extends Mapper<NullWritable, Pokemon, Text, Pokemon> {
 
     @Override
     protected void map(NullWritable key, Pokemon value, Context context) throws IOException, InterruptedException {
-            context.write(new Text(value.type), value);
+            context.write(value.type, value);
     }
 
 }

@@ -36,6 +36,8 @@ class Main {
             test.test();
         } catch(IOException e) {
             e.printStackTrace();
+        } catch(IllegalStateException e) {
+            e.printStackTrace();
         }
     }
 }
