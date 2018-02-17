@@ -49,7 +49,7 @@ public class MyTestUtils {
         try {
             FileOutputStream outputStream = new FileOutputStream(file);
             for (Pair<Text, Text> pair : output) {
-                byte[] buffer = (pair.getFirst().toString() + pair.getSecond().toString()).getBytes();
+                byte[] buffer = (pair.getFirst().toString() + "," + pair.getSecond().toString()).getBytes();
 
                 outputStream.write(buffer, 0, buffer.length);
             }

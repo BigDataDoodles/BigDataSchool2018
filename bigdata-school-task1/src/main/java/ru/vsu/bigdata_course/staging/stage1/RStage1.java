@@ -23,6 +23,6 @@ public class RStage1 extends Reducer<Text, Pokemon, Text, Text> {
             if (p.defense.compareTo(maxDeffense) > 0) maxDeffense = p.defense;
             if (p.speed.compareTo(minSpeed) < 0) minSpeed = p.speed;
         }
-        context.write(key,new Text("" + maxHP + "," + minAttack + "," + maxDeffense + "," + minSpeed) );
+        context.write(key,new Text("" + maxHP + "," + minAttack + "," + maxDeffense + "," + minSpeed + "\n") );
     }
 }
