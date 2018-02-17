@@ -36,7 +36,14 @@ public class TestUtils {
         }
 
         String csv = "C:\\Users\\Pavel\\IdeaProjects\\BigDataSchool2018\\bigdata-school-task1\\src\\test\\resources\\data.csv";
+        String[] head = new String[5];
+        head[0] = "Type";
+        head[1] = "Tank";
+        head[2] = "Feeble";
+        head[3] = "Defender";
+        head[4] = "Slowpoke";
         CSVWriter writer = new CSVWriter(new FileWriter(csv));
+        writer.writeNext(head);
         writer.writeAll(result);
         writer.close();
     }
