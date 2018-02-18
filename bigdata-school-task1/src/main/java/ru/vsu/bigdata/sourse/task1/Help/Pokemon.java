@@ -1,5 +1,5 @@
 package ru.vsu.bigdata.sourse.task1.Help;
-
+//Todo: почитай про инкапсуляцию, геттеры и сеттеры в джаве и перепиши этот класс
 public class Pokemon {
 
     private double HP;
@@ -39,6 +39,7 @@ public class Pokemon {
      * @param speed speed
      * @param name name
      */
+    //Todo: похоже на нормальный конструктор, почему метод?
     public void setCharactiristic(double HP,double attack,double def,double speed,String name){
         this.HP = HP;
         this.attack = attack;
