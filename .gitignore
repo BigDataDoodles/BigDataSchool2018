@@ -1,7 +1,4 @@
 .idea
-<<<<<<< HEAD
+target
 *.iml
-*-pom.xml
-=======
-*.iml
->>>>>>> b9d100892c905bcee3054d24d624dedb78e94ba0
+*pom.xml
