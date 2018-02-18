@@ -8,12 +8,12 @@ import java.io.IOException;
 public class PokeReducer extends Reducer<Text, Text, Text, Text>  {
     class ChosenPokemon{
         String name;
-        int attr;
+        double attr;
         ChosenPokemon(){
-            name = "";
+            name = "n/a";
             attr = 0;
         }
-        ChosenPokemon(String nm, int att) {
+        ChosenPokemon(String nm, double att) {
             name = nm;
             attr = att;
         }
@@ -21,15 +21,15 @@ public class PokeReducer extends Reducer<Text, Text, Text, Text>  {
         public String toString(){
             return name;
         }
-        public int greater(ChosenPokemon a){
-            if(this.attr < a.attr ) {
+        public double greater(ChosenPokemon a){
+            if(this.attr < a.attr || this.name.equals("n/a")) {
                 this.name = a.name;
                 this.attr = a.attr;
             }
             return this.attr;
         }
-        public int lesser(ChosenPokemon a){
-            if(this.attr > a.attr ) {
+        public double lesser(ChosenPokemon a){
+            if(this.attr > a.attr || this.name.equals("n/a")) {
                 this.name = a.name;
                 this.attr = a.attr;
             }
@@ -53,12 +53,12 @@ public class PokeReducer extends Reducer<Text, Text, Text, Text>  {
 
             String name = field[4];
 
-            tank.greater(new ChosenPokemon(name,Integer.parseInt(field[0])));
-            feeble.lesser(new ChosenPokemon(name,Integer.parseInt(field[1])));
-            defender.greater(new ChosenPokemon(name,Integer.parseInt(field[2])));
-            slowpoke.lesser(new ChosenPokemon(name,Integer.parseInt(field[3])));
+            tank.greater(new ChosenPokemon(name,Double.parseDouble(field[0])));
+            feeble.lesser(new ChosenPokemon(name,Double.parseDouble(field[1])));
+            defender.greater(new ChosenPokemon(name,Double.parseDouble(field[2])));
+            slowpoke.lesser(new ChosenPokemon(name,Double.parseDouble(field[3])));
         }
-        String val = tank.toString() + "," + feeble.toString()+ "," +defender.toString()+ ","+slowpoke.toString();
+        String val = tank.toString() + "," + feeble.toString()+ ","+defender.toString()+ ","+slowpoke.toString();
         context.write(key, new Text(val));
     }
 }
