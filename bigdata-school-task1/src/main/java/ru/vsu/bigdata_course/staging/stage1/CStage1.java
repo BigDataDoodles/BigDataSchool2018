@@ -10,6 +10,7 @@ import java.util.LinkedList;
 public class CStage1 extends Reducer<Text, Pokemon, Text, Iterable<Pokemon>> {
 
     @Override
+    //todo: why it has different logic from reducer?
     public void reduce(Text key, Iterable<Pokemon> values, Context context)
     {
         LinkedList<Pokemon> pokemons = new LinkedList<Pokemon>();

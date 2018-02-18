@@ -10,6 +10,7 @@ import java.io.DataOutput;
 import java.io.IOException;
 
 public class Pokemon implements WritableComparable<Pokemon> {
+    //todo: where are getters and setters?
     public Text number;
     public Text name;
     public Text type;
@@ -34,6 +35,7 @@ public class Pokemon implements WritableComparable<Pokemon> {
 
     public Pokemon(Row row) {
         try {
+            //todo: use constants
             this.number = new Text(row.getCell(0).getStringCellValue());
             this.name = new Text(row.getCell(1).getStringCellValue());
             this.type = new Text(row.getCell(2).getStringCellValue());
@@ -49,6 +51,7 @@ public class Pokemon implements WritableComparable<Pokemon> {
 
     @Override
     public String toString() {
+        //todo: String.format
         return this.number + " " + this.name + " " + this.type + " " + this.hp + " " + this.attack + " "
                 + this.defense + " " + this.specialAttack + " " + this.specialDeffense + " " + this.speed + "\n";
     }

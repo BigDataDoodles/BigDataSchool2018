@@ -35,6 +35,7 @@ public class MyTestUtils {
         LinkedList<Pair<NullWritable,Pokemon>> listOfPokemon = new LinkedList<Pair<NullWritable,Pokemon>>();
         Iterator<Row> itr = sheet.iterator();
         Row row;
+        //todo: use constants
         for(int i = 0; i < 1039;i++) {
             row = itr.next();
             pokemon = new Pokemon(row);
