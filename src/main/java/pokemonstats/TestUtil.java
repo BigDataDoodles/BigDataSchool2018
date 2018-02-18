@@ -56,6 +56,8 @@ public class TestUtil {
         File file = new File("src/main/resources/output.csv");
         try {
             FileOutputStream outputStream = new FileOutputStream(file);
+            byte[] headers = ("type,tank,feeble,defender,slowpoke\n").getBytes();
+            outputStream.write(headers, 0, headers.length);
             for (Pair<Text, Text> pair : output) {
                 byte[] buffer = (pair.getFirst().toString() + "," + pair.getSecond().toString()+"\n").getBytes();
                 outputStream.write(buffer, 0, buffer.length);
