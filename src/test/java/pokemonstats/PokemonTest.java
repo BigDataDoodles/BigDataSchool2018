@@ -28,6 +28,7 @@ public class PokemonTest {
 
 }
 class Main {
+    //TODO: I think you are cheating)) I have seen that)
     public static void main(String[] args) {
         PokemonTest test = new PokemonTest();
         try {

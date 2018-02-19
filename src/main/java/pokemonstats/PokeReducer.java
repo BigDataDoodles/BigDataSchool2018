@@ -6,6 +6,7 @@ import org.apache.hadoop.mapreduce.Reducer;
 import java.io.IOException;
 
 public class PokeReducer extends Reducer<Text, Text, Text, Text>  {
+    //TODO: Why is the ChosenPokemon inner class? It should be just class
     class ChosenPokemon{
         String name;
         double attr;
