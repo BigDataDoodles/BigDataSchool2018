@@ -23,6 +23,7 @@ import java.util.List;
 //TODO Метод записи файла, в качестве параметра принимает коллекцию возвращаемую методом run() экземпляра класса MapReduceDriver
 public class PokemonTest {
 
+    //TODO: absolute path is bad!
     private static String path = "L:/BigData/BigDataSchool2018/bigdata-school-task1/src/test/resources/pokemon.csv";
     @Test
     public void test() {

@@ -31,6 +31,7 @@ public class TestUtils {
         //закрываем мой ридер
         reader.close();
 
+        //TODO: remove(null)?
         pokemons.remove(null);
         return pokemons;
     }

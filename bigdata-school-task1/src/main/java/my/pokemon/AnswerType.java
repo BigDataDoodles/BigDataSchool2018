@@ -25,6 +25,7 @@ public class AnswerType {
     AnswerType ( String str) throws NumberFormatException
     {
         String[] mas = str.split(",");
+        //TODO: Use constants
         this.number = mas[1];
         this.name = mas[2];
         this.type = mas[3];
