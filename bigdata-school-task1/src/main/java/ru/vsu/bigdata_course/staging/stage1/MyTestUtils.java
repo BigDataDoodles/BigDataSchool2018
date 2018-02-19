@@ -14,6 +14,8 @@ import org.apache.poi.ss.usermodel.Row;
 
 public class MyTestUtils {
 
+    private final static int COUNT_READABLE_POKEMONS = 1039;
+
     public static List<Pair<NullWritable,Pokemon>> readExcel(String path) {
         FileInputStream file;
         HSSFWorkbook workbook;
@@ -35,8 +37,7 @@ public class MyTestUtils {
         LinkedList<Pair<NullWritable,Pokemon>> listOfPokemon = new LinkedList<Pair<NullWritable,Pokemon>>();
         Iterator<Row> itr = sheet.iterator();
         Row row;
-        //todo: use constants
-        for(int i = 0; i < 1039;i++) {
+        for(int i = 0; i < COUNT_READABLE_POKEMONS ;i++) {
             row = itr.next();
             pokemon = new Pokemon(row);
             listOfPokemon.add(new Pair<NullWritable,Pokemon>(NullWritable.get(), pokemon));
@@ -46,7 +47,7 @@ public class MyTestUtils {
     }
 
     public static void OutputResult(List<Pair<Text, Text>> output) {
-        File file = new File("bigdata-school-task1/src/test/resources/output.csv");
+        File file = new File("resources/output.csv");
         try {
             FileOutputStream outputStream = new FileOutputStream(file);
             for (Pair<Text, Text> pair : output) {

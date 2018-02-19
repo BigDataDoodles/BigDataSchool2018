@@ -22,8 +22,7 @@ public class PokemonTest {
     public void test() throws IOException {
         MapReduceDriver<NullWritable, Pokemon, Text, Pokemon, Text, Text> driver =
                 MapReduceDriver.newMapReduceDriver(new MStage1(), new RStage1());
-        //todo: the absolute path is bad
-        driver.addAll(MyTestUtils.readExcel("bigdata-school-task1/src/test/resources/pokemon.xls"));
+        driver.addAll(MyTestUtils.readExcel("resources/pokemon.xls"));
         List<Pair<Text, Text>> res = driver.run();
 
         MyTestUtils.OutputResult(res);
