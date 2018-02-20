@@ -19,7 +19,7 @@ public class Pokemon  {
     private final int POSITION_FOR_HP = 2;
     private final int POSITION_FOR_TYPE = 3;
     private final int POSITION_FOR_ATTACK = 4;
-    private final int POSITION_FOR_DEFENCE = 5;
+    private final int POSITION_FOR_DEFENSE = 5;
     private final int POSITION_FOR_SPECIAL_ATTACK = 6;
     private final int POSITION_FOR_SPECIAL_DEFENSE = 7;
     private final int POSITION_FOR_SPEED = 8;
@@ -31,7 +31,7 @@ public class Pokemon  {
         this.setType(row[POSITION_FOR_TYPE]);
         this.setHp(Integer.parseInt(row[POSITION_FOR_HP]));
         this.setAttack(Integer.parseInt(row[POSITION_FOR_ATTACK]));
-        this.setDefence(Integer.parseInt(row[POSITION_FOR_DEFENCE]));
+        this.setDefence(Integer.parseInt(row[POSITION_FOR_DEFENSE]));
         this.setSpecialAttack(Integer.parseInt(row[POSITION_FOR_SPECIAL_ATTACK]));
         this.setSpecialDefense(Integer.parseInt(row[POSITION_FOR_SPECIAL_DEFENSE]));
         this.setSpeed(Integer.parseInt(row[POSITION_FOR_SPEED]));
