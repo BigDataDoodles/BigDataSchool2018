@@ -1,4 +1,5 @@
 package ru.vsu.bigdata.sourse.task1.Help;
+<<<<<<< HEAD
 
 import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.Text;
@@ -16,6 +17,50 @@ public class Pokemon implements Writable{
     }
 
     public void setHP(DoubleWritable HP) {
+=======
+//Todo: почитай про инкапсуляцию, геттеры и сеттеры в джаве и перепиши этот класс
+public class Pokemon {
+
+    private double HP;
+    private double attack;
+    private double def;
+    private double speed;
+    private String name;
+
+    /**
+     * Получение характеристик покемона
+     * @param i
+     * @return Hp если i = 0; attak если i = 1; defend если i = 2; speed если i = 3;
+     */
+    public double getCharactiristics(int i){
+        switch (i){
+            case 0: return HP;
+            case 1: return attack;
+            case 2: return def;
+            case 3: return speed;
+        }
+        return -1;
+    }
+
+    /**
+     * Получение имени покемона
+     * @return
+     */
+    public String getName(){
+        return name;
+    }
+
+    /**
+     * Задание статистик
+     * @param HP health
+     * @param attack attack
+     * @param def defence
+     * @param speed speed
+     * @param name name
+     */
+    //Todo: похоже на нормальный конструктор, почему метод?
+    public void setCharactiristic(double HP,double attack,double def,double speed,String name){
+>>>>>>> 6d1776e5337c338ee0c28946a37f43678994a098
         this.HP = HP;
     }
 

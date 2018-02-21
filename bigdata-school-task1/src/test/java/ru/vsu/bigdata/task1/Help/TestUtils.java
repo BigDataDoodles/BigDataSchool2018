@@ -35,7 +35,12 @@ public class TestUtils {
             i++;
         }
 
+<<<<<<< HEAD
         String csv = "./src/test/resources/pokemon.csv";
+=======
+        //Todo: the absolute path is bad!!
+        String csv = "C:\\Users\\Pavel\\IdeaProjects\\BigDataSchool2018\\bigdata-school-task1\\src\\test\\resources\\data.csv";
+>>>>>>> 6d1776e5337c338ee0c28946a37f43678994a098
         String[] head = new String[5];
         head[0] = "Type";
         head[1] = "Tank";
@@ -114,8 +119,15 @@ public class TestUtils {
      * @param str
      * @return
      */
+<<<<<<< HEAD
     private static boolean isValid(String[] str){
         if(str.length < 8) {
+=======
+    private static boolean isValid(String str){
+        String[] list = str.split(",");
+        //Todo: return (list.length >= 8)
+        if(list.length < 8) {
+>>>>>>> 6d1776e5337c338ee0c28946a37f43678994a098
             return false;
         }
         return true;

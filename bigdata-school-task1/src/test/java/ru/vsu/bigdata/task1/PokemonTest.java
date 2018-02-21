@@ -15,6 +15,8 @@ import ru.vsu.bigdata.task1.Help.TestUtils;
 //TODO Метод чтения файла, должен возвращать List<Pair<KEY_IN, VALUE_IN>>.
 //TODO Далее эта коллекция передается в качестве аргумента в метод addAll() в экземпляр класса MapReduceDriver
 //TODO Метод записи файла, в качестве параметра принимает коллекцию возвращаемую методом run() экземпляра класса MapReduceDriver
+
+//TODO: зачем наследование?
 public class PokemonTest extends TestUtils {
 
 
