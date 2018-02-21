@@ -5,50 +5,39 @@ import org.apache.hadoop.mapreduce.Reducer;
 import ru.vsu.bigdata.sourse.task1.Help.Pokemon;
 
 import java.io.IOException;
-import java.util.Iterator;
 
-public class RPokemon extends Reducer<Text,Text,Text,Text>{
+
+public class RPokemon extends Reducer<Text,Pokemon,Text,Text>{
 
     @Override
-    protected void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
+    protected void reduce(Text key, Iterable<Pokemon> values, Context context) throws IOException, InterruptedException {
         Pokemon tank = new Pokemon();
         Pokemon feeble = new Pokemon();
         Pokemon defender = new Pokemon();
-        Pokemon slowpoke = new Pokemon();
+        Pokemon slowPoke = new Pokemon();
+        for(Pokemon it: values){
 
-        //первичное приближение
-        tank.setCharactiristic(20,100,20,100,"example");
-        feeble.setCharactiristic(20,100,20,100,"example");
-        defender.setCharactiristic(20,100,20,100,"example");
-        slowpoke.setCharactiristic(20,100,20,100,"example");
-
-        for(Text str: values) {
-            String[] characteristics = str.toString().split(",");
-
-            //нахождение нужных нам коэффициентов скорости, атаки, и т.д.
-            if (tank.getCharactiristics(0) < Double.parseDouble(characteristics[1])) {
-                tank.setCharactitistic(0, Double.parseDouble(characteristics[1]));
-                tank.setCharactiristic(characteristics[0]);
+            if(Double.parseDouble(tank.getHP().toString()) < Double.parseDouble(it.getHP().toString())){
+                tank.setHP(it.getHP());
+                tank.setName(it.getName());
             }
 
-            if (feeble.getCharactiristics(1) > Double.parseDouble(characteristics[2])) {
-                feeble.setCharactitistic(1, Double.parseDouble(characteristics[2]));
-                feeble.setCharactiristic(characteristics[0]);
+            if(Double.parseDouble(feeble.getAttack().toString()) > Double.parseDouble(it.getAttack().toString())){
+                feeble.setAttack(it.getAttack());
+                feeble.setName(it.getName());
             }
 
-            if (defender.getCharactiristics(2) < Double.parseDouble(characteristics[5])) {
-                defender.setCharactitistic(2, Double.parseDouble(characteristics[5]));
-                defender.setCharactiristic(characteristics[0]);
+            if(Double.parseDouble(defender.getDef().toString()) < Double.parseDouble(it.getDef().toString())){
+                defender.setName(it.getName());
+                defender.setDef(it.getDef());
             }
 
-            if (slowpoke.getCharactiristics(3) < Double.parseDouble(characteristics[6])) {
-                slowpoke.setCharactitistic(3, Double.parseDouble(characteristics[6]));
-                slowpoke.setCharactiristic(characteristics[0]);
+            if(Double.parseDouble(slowPoke.getSpeed().toString()) > Double.parseDouble(it.getSpeed().toString())){
+                slowPoke.setName(it.getName());
+                slowPoke.setSpeed(it.getSpeed());
             }
-
         }
-        String result = tank.getName()+ "," + feeble.getName()+ "," + defender.getName()+ "," + slowpoke.getName();
-        context.write(key,new Text(result));
+        String res = tank.getName()+ "," + feeble.getName()+ "," + defender.getName()+ "," + slowPoke.getName();
+        context.write(key,new Text(res));
     }
-
 }

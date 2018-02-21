@@ -1,6 +1,7 @@
 package ru.vsu.bigdata.task1;
 
 import org.junit.Test;
+import ru.vsu.bigdata.sourse.task1.Help.Pokemon;
 import ru.vsu.bigdata.sourse.task1.MPokemon;
 import ru.vsu.bigdata.sourse.task1.RPokemon;
 import org.apache.hadoop.io.NullWritable;
@@ -19,7 +20,7 @@ public class PokemonTest extends TestUtils {
 
     @Test
     public void test() throws IOException{
-        MapReduceDriver<NullWritable, Text, Text, Text, Text, Text> driver =
+        MapReduceDriver<NullWritable, Pokemon, Text, Pokemon, Text, Text> driver =
                 MapReduceDriver.newMapReduceDriver( new MPokemon(), new RPokemon());
         driver.addAll(read());
         write(driver.run());
