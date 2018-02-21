@@ -93,6 +93,18 @@ public class Pokemon implements Writable {
         this.type = type;
     }
 
+    @Override
+    public String toString() {
+        return "Pokemon{" +
+                "HP=" + HP +
+                ", attack=" + attack +
+                ", def=" + def +
+                ", speed=" + speed +
+                ", name=" + name +
+                ", type=" + type +
+                '}';
+    }
+
     public Pokemon(){
         this.attack = new DoubleWritable(100);//нам надо найти минимум, поэтому выставим большое число
         this.def = new DoubleWritable(0);
