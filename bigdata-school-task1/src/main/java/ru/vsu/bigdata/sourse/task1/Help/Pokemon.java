@@ -107,10 +107,10 @@ public class Pokemon implements Writable {
 
     public Pokemon(){
         //TODO: Double.MAX_VALUE вместо 100
-        this.attack = new DoubleWritable(100);//нам надо найти минимум, поэтому выставим большое число
-        this.def = new DoubleWritable(0);
-        this.HP = new DoubleWritable(0);
-        this.speed = new DoubleWritable(100);//нам надо найти минимум, поэтому выставим большое число
+        this.attack = new DoubleWritable(Double.MAX_VALUE);//нам надо найти минимум, поэтому выставим большое число
+        this.def = new DoubleWritable(Double.MIN_VALUE);
+        this.HP = new DoubleWritable(Double.MIN_VALUE);
+        this.speed = new DoubleWritable(Double.MAX_VALUE);//нам надо найти минимум, поэтому выставим большое число
         this.name = new Text("Example name");
         this.type = new Text("Example type");
     }
