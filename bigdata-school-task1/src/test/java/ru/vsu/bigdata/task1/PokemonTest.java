@@ -29,6 +29,7 @@ public class PokemonTest {
     }
 
 }
+//TODO: it's not nessesary. Tests(@Test) run automatically
 class Main {
     public static void main(String[] args) {
         PokemonTest test = new PokemonTest();
