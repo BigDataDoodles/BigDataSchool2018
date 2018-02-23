@@ -40,6 +40,17 @@ public class Pokemon implements Writable {
         specialDefence = new DoubleWritable();
         speed = new DoubleWritable();
     }
+    public Pokemon(Pokemon p){
+        name = new Text(p.name);
+        type = new Text(p.type);
+        power = new DoubleWritable(p.power.get());
+        hp = new DoubleWritable(p.hp.get());
+        attack = new DoubleWritable(p.attack.get());
+        defence = new DoubleWritable(p.defence.get());
+        specialAttack = new DoubleWritable(p.specialAttack.get());
+        specialDefence = new DoubleWritable(p.specialDefence.get());
+        speed = new DoubleWritable(p.speed.get());
+    }
     public Pokemon(String csvRow) {
         String[] row = csvRow.split(",");
 
