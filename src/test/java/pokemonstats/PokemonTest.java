@@ -2,7 +2,6 @@
 package pokemonstats;
 
 
-import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mrunit.mapreduce.MapReduceDriver;
 import org.apache.hadoop.mrunit.types.Pair;
@@ -18,24 +17,12 @@ import java.util.List;
 public class PokemonTest {
     @Test
     public void test() throws IOException {
-        MapReduceDriver<LongWritable, Text, Text, Text, Text, Text> driver =
+        MapReduceDriver<Text, Text, Text, Text, Text, Text> driver =
                 new MapReduceDriver(new PokeMapper(), new PokeReducer());
+        driver.addAll(TestUtil.readXlsx("src/main/resources/pokemon.xlsx"));
+        List<Pair<Text, Text>> results = driver.run();
+        TestUtil.Output(results);
 
-        driver.addAll(TestUtil.readExcel("src/main/resources/pokemon.xlsx"));
-        List<Pair<Text, Text>> res = driver.run();
-        TestUtil.OutputResult(res);
     }
 
-}
-class Main {
-    public static void main(String[] args) {
-        PokemonTest test = new PokemonTest();
-        try {
-            test.test();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (IllegalStateException e) {
-            e.printStackTrace();
-        }
-    }
 }

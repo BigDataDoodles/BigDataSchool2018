@@ -1,6 +1,5 @@
 package pokemonstats;
 
-import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mrunit.types.Pair;
 import org.apache.poi.ss.usermodel.Cell;
@@ -16,8 +15,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class TestUtil {
-    public static List<Pair<LongWritable,Text>> readExcel(String path) {
-        LinkedList<Pair<LongWritable,Text>> pokemonRow = new LinkedList<Pair<LongWritable,Text>>();
+    public static List<Pair<Text,Text>> readXlsx(String path) {
+        LinkedList<Pair<Text,Text>> pokemonRow = new LinkedList<Pair<Text,Text>>();
         try  {
             FileInputStream file = new FileInputStream(new File(path));
             XSSFWorkbook wb = new XSSFWorkbook(file);
@@ -38,7 +37,7 @@ public class TestUtil {
                         cellValue += String.valueOf(cell.getRawValue())+",";
 
                 }
-                pokemonRow.add(new Pair<LongWritable,Text>(new LongWritable(), new Text(cellValue)));
+                pokemonRow.add(new Pair<Text,Text>(new Text(), new Text(cellValue)));
             }
 
         }catch(FileNotFoundException e) {
@@ -52,7 +51,7 @@ public class TestUtil {
         return pokemonRow;
     }
 
-    public static void OutputResult(List<Pair<Text, Text>> output) {
+    public static void Output(List<Pair<Text, Text>> output) {
         File file = new File("src/main/resources/output.csv");
         try {
             FileOutputStream outputStream = new FileOutputStream(file);

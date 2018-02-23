@@ -5,60 +5,41 @@ import org.apache.hadoop.mapreduce.Reducer;
 
 import java.io.IOException;
 
-public class PokeReducer extends Reducer<Text, Text, Text, Text>  {
-    class ChosenPokemon{
-        String name;
-        double attr;
-        ChosenPokemon(){
-            name = "n/a";
-            attr = 0;
-        }
-        ChosenPokemon(String nm, double att) {
-            name = nm;
-            attr = att;
-        }
-        @Override
-        public String toString(){
-            return name;
-        }
-        public double greater(ChosenPokemon a){
-            if(this.attr < a.attr || this.name.equals("n/a")) {
-                this.name = a.name;
-                this.attr = a.attr;
-            }
-            return this.attr;
-        }
-        public double lesser(ChosenPokemon a){
-            if(this.attr > a.attr || this.name.equals("n/a")) {
-                this.name = a.name;
-                this.attr = a.attr;
-            }
-            return this.attr;
-        }
-    }
-
+public class PokeReducer extends Reducer<Text, Pokemon, Text, Text>  {
     @Override
-    public void reduce(Text key, Iterable<Text> values, Context context)
+    public void reduce(Text key, Iterable<Pokemon> listOfPokemon, Context context)
             throws IOException, InterruptedException {
+        Pokemon tank = new Pokemon();
+        Pokemon feeble = new Pokemon();
+        Pokemon defender = new Pokemon();
+        Pokemon slowpoke = new Pokemon();
+        boolean initialized = false;
+        for (Pokemon pokemon : listOfPokemon) {
+            if(!initialized){//initialize all the pokemon
+                tank = new Pokemon(pokemon.toString());
+                feeble = new Pokemon(pokemon.toString());
+                defender = new Pokemon(pokemon.toString());
+                slowpoke = new Pokemon(pokemon.toString());
+                initialized = true;
+            }
+            if(pokemon.getHp().compareTo(tank.getHp()) > 0)
+                tank = new Pokemon(pokemon.toString());
 
-        ChosenPokemon tank = new ChosenPokemon();
-        ChosenPokemon feeble = new ChosenPokemon();
-        ChosenPokemon defender = new ChosenPokemon();
-        ChosenPokemon slowpoke = new ChosenPokemon();
 
-        for (Text value : values) {
-            //values = hp, attack, defence, speed, name;
-            String line = value.toString();
-            String[] field = line.split(",");
+            if(pokemon.getAllAttack().compareTo(feeble.getAllAttack()) < 0)
+                feeble = new Pokemon(pokemon.toString());
 
-            String name = field[4];
+            if(pokemon.getAllDefence().compareTo(defender.getAllDefence()) > 0)
+                defender = new Pokemon(pokemon.toString());
 
-            tank.greater(new ChosenPokemon(name,Double.parseDouble(field[0])));
-            feeble.lesser(new ChosenPokemon(name,Double.parseDouble(field[1])));
-            defender.greater(new ChosenPokemon(name,Double.parseDouble(field[2])));
-            slowpoke.lesser(new ChosenPokemon(name,Double.parseDouble(field[3])));
+            if(pokemon.getSpeed().compareTo(slowpoke.getSpeed()) < 0)
+                slowpoke = new Pokemon(pokemon.toString());
         }
-        String val = tank.toString() + "," + feeble.toString()+ ","+defender.toString()+ ","+slowpoke.toString();
-        context.write(key, new Text(val));
+        Text val = new Text(
+                        tank.getName()
+                        + "," + feeble.getName()
+                        + "," + defender.getName()
+                        + "," + slowpoke.getName());
+        context.write(key, val);
     }
 }
