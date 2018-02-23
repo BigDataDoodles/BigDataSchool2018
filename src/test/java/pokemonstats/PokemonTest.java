@@ -22,7 +22,6 @@ public class PokemonTest {
         driver.addAll(TestUtil.readXlsx("src/main/resources/pokemon.xlsx"));
         List<Pair<Text, Text>> results = driver.run();
         TestUtil.Output(results);
-
     }
 
 }

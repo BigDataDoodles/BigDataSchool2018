@@ -15,16 +15,16 @@ public class PokeReducer extends Reducer<Text, Pokemon, Text, Text>  {
         Pokemon slowpoke = new Pokemon();
         boolean initialized = false;
         for (Pokemon pokemon : listOfPokemon) {
-            if(!initialized){//initialize all the pokemon
+            if(!initialized){//adopt values of the first element for all resultant pokemon
                 tank = new Pokemon(pokemon.toString());
                 feeble = new Pokemon(pokemon.toString());
                 defender = new Pokemon(pokemon.toString());
                 slowpoke = new Pokemon(pokemon.toString());
                 initialized = true;
+                continue;
             }
             if(pokemon.getHp().compareTo(tank.getHp()) > 0)
                 tank = new Pokemon(pokemon.toString());
-
 
             if(pokemon.getAllAttack().compareTo(feeble.getAllAttack()) < 0)
                 feeble = new Pokemon(pokemon.toString());

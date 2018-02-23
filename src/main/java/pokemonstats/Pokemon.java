@@ -8,7 +8,7 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
-public class Pokemon implements Writable, Comparable<Pokemon> {
+public class Pokemon implements Writable {
     private Text name;
     private Text type;
     private DoubleWritable power;
@@ -18,6 +18,16 @@ public class Pokemon implements Writable, Comparable<Pokemon> {
     private DoubleWritable specialAttack;
     private DoubleWritable specialDefence;
     private DoubleWritable speed;
+
+    private static final int NAME = 1;
+    private static final int TYPE = 2;
+    private static final int POWER = 3;
+    private static final int HP = 4;
+    private static final int ATTACK = 5;
+    private static final int SPECIAL_ATTACK = 7;
+    private static final int DEFENCE = 6;
+    private static final int SPECIAL_DEFENCE = 8;
+    private static final int SPEED = 9;
 
     public Pokemon(){
         name = new Text();
@@ -32,15 +42,44 @@ public class Pokemon implements Writable, Comparable<Pokemon> {
     }
     public Pokemon(String csvRow) {
         String[] row = csvRow.split(",");
-        type = new Text(row[2]);
-        name = new Text(row[1]);
-        power = new DoubleWritable(Double.parseDouble(row[3]));
-        hp = new DoubleWritable(Double.parseDouble(row[4]));
-        attack = new DoubleWritable(Double.parseDouble(row[5]));
-        specialAttack = new DoubleWritable(Double.parseDouble(row[7]));
-        defence = new DoubleWritable(Double.parseDouble(row[6]));
-        specialDefence = new DoubleWritable(Double.parseDouble(row[8]));
-        speed = new DoubleWritable(Double.parseDouble(row[9]));
+
+        type = new Text(row[TYPE]);
+        name = new Text(row[NAME]);
+        try {
+            power = new DoubleWritable(Double.parseDouble(row[POWER]));
+        }catch (NumberFormatException e){
+            power = new DoubleWritable(0);
+        }
+        try{
+            hp = new DoubleWritable(Double.parseDouble(row[HP]));
+        }catch (NumberFormatException e){
+            hp = new DoubleWritable(0);
+        }
+        try{
+            attack = new DoubleWritable(Double.parseDouble(row[ATTACK]));
+        }catch (NumberFormatException e){
+            attack = new DoubleWritable(0);
+        }
+        try{
+            specialAttack = new DoubleWritable(Double.parseDouble(row[SPECIAL_ATTACK]));
+        }catch (NumberFormatException e){
+            specialAttack = new DoubleWritable(0);
+        }
+        try{
+            defence = new DoubleWritable(Double.parseDouble(row[DEFENCE]));
+        }catch (NumberFormatException e){
+            defence = new DoubleWritable(0);
+        }
+        try{
+            specialDefence = new DoubleWritable(Double.parseDouble(row[SPECIAL_DEFENCE]));
+        }catch (NumberFormatException e){
+            specialDefence = new DoubleWritable(0);
+        }
+        try{
+            speed = new DoubleWritable(Double.parseDouble(row[SPEED]));
+        }catch (NumberFormatException e){
+            speed = new DoubleWritable(0);
+        }
     }
     @Override
     public String toString(){
@@ -122,9 +161,5 @@ public class Pokemon implements Writable, Comparable<Pokemon> {
         DoubleWritable returnValue = new DoubleWritable();
         returnValue.set(tmp);
         return returnValue;
-    }
-    public int compareTo(Pokemon o) {//in case of equal quantities of e.g speed choose the pokemon with the name that
-        // comes first alphabetically
-        return this.name.compareTo(o.name);
     }
 }
