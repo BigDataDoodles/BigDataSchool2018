@@ -17,12 +17,12 @@ public class Pokemon   {
     private final int POSITION_FOR_NUMBER = 0;
     private final int POSITION_FOR_NAME = 1;
     private final int POSITION_FOR_TYPE = 2;
-    private final int POSITION_FOR_HP = 3;
-    private final int POSITION_FOR_ATTACK = 4;
-    private final int POSITION_FOR_DEFENSE = 5;
-    private final int POSITION_FOR_SPECIAL_ATTACK = 6;
-    private final int POSITION_FOR_SPECIAL_DEFENSE = 7;
-    private final int POSITION_FOR_SPEED = 8;
+    private final int POSITION_FOR_HP = 4;
+    private final int POSITION_FOR_ATTACK = 5;
+    private final int POSITION_FOR_DEFENSE = 6;
+    private final int POSITION_FOR_SPECIAL_ATTACK = 7;
+    private final int POSITION_FOR_SPECIAL_DEFENSE = 8;
+    private final int POSITION_FOR_SPEED = 9;
 
 
     Pokemon(String[] row) {
