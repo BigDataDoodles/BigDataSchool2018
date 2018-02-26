@@ -27,6 +27,7 @@ public class RStage2 extends Reducer<Text, Pokemon, Text, Text> implements org.a
 
     }
 
+    //TODO: лишние переопределения
     @Override
     public void reduce(Text text, Iterator<Pokemon> iterator, OutputCollector<Text, Text> outputCollector, Reporter reporter) throws IOException {
 

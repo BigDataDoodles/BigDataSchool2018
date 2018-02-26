@@ -17,6 +17,7 @@ public class MStage2 extends Mapper<NullWritable, Pokemon, Text, Pokemon> implem
         context.write(new Text(pokemon.getType()), pokemon);
     }
 
+    //TODO:  Зачем эти три методда переопределил с пустыми телами? Это лишнее
     @Override
     public void map(NullWritable nullWritable, Pokemon pokemon, OutputCollector<Text, Pokemon> outputCollector, Reporter reporter) throws IOException {
 

@@ -12,6 +12,7 @@ import java.util.Map;
 
 public class TestUtils {
 
+    //TODO: Почему ты выбрал такую структыру, и почему их 4??
     private static Map<String, Pokemon> tank = new HashMap<>();
     private static Map<String, Pokemon> feeble = new HashMap<>();
     private static Map<String, Pokemon> defender = new HashMap<>();
