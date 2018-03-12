@@ -1,5 +1,7 @@
 package ru.vsu.bigdata.task1;
 
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVPrinter;
 import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
@@ -8,14 +10,18 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.io.BufferedWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 public class FileUtils {
 
-    private static final String POKEMON_XLSX_FILEPATH = "/resources";
+    private static final String POKEMON_XLSX_FILEPATH = "./resources/pokemon.xlsx";
+    private static final String POKEMON_CSV_FILEPATH = "./resources/pokemonChart.csv";
     private static final int NUMBER_OF_STRING_FIELDS = 3;
     private static final int NUMBER_OF_NUMERIC_FIELDS = 6;
 
@@ -50,14 +56,22 @@ public class FileUtils {
                         new DoubleWritable(doubleValues.get(2)), new DoubleWritable(doubleValues.get(3)), new DoubleWritable(doubleValues.get(4)),
                         new DoubleWritable(doubleValues.get(5)));
 
-                pokemons.add(new Pair<NullWritable, Pokemon>(NullWritable.get(),pokemon));
+                pokemons.add(new Pair<NullWritable, Pokemon>(NullWritable.get(), pokemon));
             }
         }
-        return  pokemons;
+        return pokemons;
     }
 
-    public static void writeCsv(List<Pair<Text, Text>> input) {
+    public static void writeCsv(List<Pair<Text, Text>> input) throws IOException {
 
+        BufferedWriter writer = Files.newBufferedWriter(Paths.get(POKEMON_CSV_FILEPATH));
+        CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT.withHeader("Type", "Tank", "Feeble",
+                "Defender", "Slowpoke"));
+
+        for (Pair<Text, Text> pair : input) {
+            csvPrinter.printRecord(pair.getFirst(), pair.getSecond());
+        csvPrinter.flush();
+        writer.close();
+        }
     }
 }
-
