@@ -12,12 +12,7 @@ object Application extends App{
 
   val textStats = new TextStats(songFile)
 
-  //wean stop words out of the text
-  val weanedText = textStats.weanStopWords(stopWordsFile)
-  val weanedTextCount = weanedText.collect().length
-  val allTextCount = textStats.getAllWords().collect().length
-
-  val sensibilityRate = weanedTextCount.toDouble/allTextCount.toDouble
+  val sensibilityRate = textStats.getWeanedWordsRatio(stopWordsFile)
   println(s"соотношение значащих слов $sensibilityRate")
 
   if(sensibilityRate > 0.6)

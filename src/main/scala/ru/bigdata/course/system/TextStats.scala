@@ -33,4 +33,10 @@ class TextStats(src: String) {
   def getAllWords(): RDD[String]={
     return allWords
   }
+  def getWeanedWordsRatio(stopWordsFile: String): Double ={
+    //wean stop words out of the text
+    val weanedTextCount = weanStopWords(stopWordsFile).collect().length
+    val allTextCount = getAllWords().collect().length
+    weanedTextCount.toDouble/allTextCount.toDouble
+  }
 }
