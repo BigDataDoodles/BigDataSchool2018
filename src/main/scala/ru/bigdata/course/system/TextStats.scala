@@ -36,7 +36,14 @@ class TextStats(src: String) {
   def getWeanedWordsRatio(stopWordsFile: String): Double ={
     //wean stop words out of the text
     val weanedTextCount = weanStopWords(stopWordsFile).collect().length
-    val allTextCount = getAllWords().collect().length
+    val allTextCount = getAllWords().map(_ => 1).count()
     weanedTextCount.toDouble/allTextCount.toDouble
   }
+  def close(): Unit ={
+    this.spark.stop()
+  }
 }
+
+//test all the other reduceByKey, groupByKey, combineByKey
+//spark sql
+//funsuite extended by test

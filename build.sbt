@@ -15,7 +15,7 @@ resolvers ++= Seq(
 
 libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % scalaTestVersion % "test",
-  "com.holdenkarau" %% "spark-testing-base" % "2.2.0_0.7.4" % "test",
+  //"com.holdenkarau" %% "spark-testing-base" % "2.2.0_0.7.4" % "test",
   "org.apache.spark" %% "spark-core" % sparkVersion % "compile",
   "org.apache.spark" %% "spark-sql" % sparkVersion % "compile",
   "org.apache.spark" %% "spark-streaming" % sparkVersion % "compile",

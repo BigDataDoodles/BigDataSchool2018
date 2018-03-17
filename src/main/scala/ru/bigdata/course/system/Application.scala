@@ -11,7 +11,6 @@ object Application extends App{
   val stopWordsFile = "resources/small-stopwords.txt"
 
   val textStats = new TextStats(songFile)
-
   val sensibilityRate = textStats.getWeanedWordsRatio(stopWordsFile)
   println(s"соотношение значащих слов $sensibilityRate")
 
