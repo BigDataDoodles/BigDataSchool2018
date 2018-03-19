@@ -2,13 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e70265c6-0818-4131-b2f3-8fc5f6276888" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/pokemonChart.csv" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/ru/vsu/bigdata_course/staging/stage1/DStage1.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/ru/vsu/bigdata_course/staging/stage1/MStage1.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/ru/vsu/bigdata_course/staging/stage1/RStage1.class" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/target/test-classes/ru/vsu/bigdata_course/Stage1Test.class" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/bigdata-school-task1/src/test/java/ru/vsu/bigdata/task1/FileUtils.java" afterPath="$PROJECT_DIR$/bigdata-school-task1/src/test/java/ru/vsu/bigdata/task1/FileUtils.java" />
       <change beforePath="$PROJECT_DIR$/bigdata-school-task1/src/test/java/ru/vsu/bigdata/task1/Pokemon.java" afterPath="$PROJECT_DIR$/bigdata-school-task1/src/test/java/ru/vsu/bigdata/task1/Pokemon.java" />
       <change beforePath="$PROJECT_DIR$/bigdata-school-task1/src/test/java/ru/vsu/bigdata/task1/PokemonReducer.java" afterPath="$PROJECT_DIR$/bigdata-school-task1/src/test/java/ru/vsu/bigdata/task1/PokemonReducer.java" />
-      <change beforePath="$PROJECT_DIR$/bigdata-school-task1/src/test/resources/pokemon.xlsx" afterPath="$PROJECT_DIR$/pokemon.xlsx" />
-      <change beforePath="$PROJECT_DIR$/bigdata-school-task1/target/test-classes/pokemon.xlsx" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/bigdata-school-task1/src/test/resources/pokemon.xlsx" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/bigdata-school-task1/target/test-classes/pokemon.xlsx" afterPath="$PROJECT_DIR$/pokemon.xlsx" />
       <change beforePath="$PROJECT_DIR$/bigdata-school-task1/target/test-classes/ru/vsu/bigdata/task1/FileUtils$1.class" afterPath="$PROJECT_DIR$/bigdata-school-task1/target/test-classes/ru/vsu/bigdata/task1/FileUtils$1.class" />
       <change beforePath="$PROJECT_DIR$/bigdata-school-task1/target/test-classes/ru/vsu/bigdata/task1/FileUtils.class" afterPath="$PROJECT_DIR$/bigdata-school-task1/target/test-classes/ru/vsu/bigdata/task1/FileUtils.class" />
       <change beforePath="$PROJECT_DIR$/bigdata-school-task1/target/test-classes/ru/vsu/bigdata/task1/Pokemon$1.class" afterPath="$PROJECT_DIR$/bigdata-school-task1/target/test-classes/ru/vsu/bigdata/task1/Pokemon$1.class" />
@@ -372,7 +377,7 @@
       <workItem from="1521182695846" duration="3621000" />
       <workItem from="1521186370316" duration="1313000" />
       <workItem from="1521198461082" duration="919000" />
-      <workItem from="1521464815607" duration="925000" />
+      <workItem from="1521464815607" duration="954000" />
     </task>
     <servers />
   </component>
@@ -409,7 +414,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27288000" />
+    <option name="totallyTimeSpent" value="27317000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
