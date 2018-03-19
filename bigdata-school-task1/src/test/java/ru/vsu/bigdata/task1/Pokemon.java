@@ -37,7 +37,7 @@ public class Pokemon implements Writable {
         this.hp = new DoubleWritable(Double.MIN_VALUE);
         this.attack = new DoubleWritable(Double.MAX_VALUE);
         this.defence = new DoubleWritable(Double.MIN_VALUE);
-        this.speed = new DoubleWritable(Double.MIN_VALUE);
+        this.speed = new DoubleWritable(Double.MAX_VALUE);
 
         this.specialAttack = new DoubleWritable(Double.MAX_VALUE);
         this.specialDefence = new DoubleWritable(Double.MIN_VALUE);
@@ -53,6 +53,19 @@ public class Pokemon implements Writable {
         this.specialAttack = specialAttack;
         this.specialDefence = specialDefence;
         this.speed = speed;
+    }
+
+    //copy constructor
+    public Pokemon(Pokemon pokemon) {
+        this.number = new Text(pokemon.getNumber());
+        this.name = new Text(pokemon.getName());
+        this.type = new Text(pokemon.getType());
+        this.hp = new DoubleWritable(pokemon.getHp().get());
+        this.attack = new DoubleWritable(pokemon.getAttack().get());
+        this.defence = new DoubleWritable(pokemon.getDefence().get());
+        this.specialAttack = new DoubleWritable(pokemon.getSpecialAttack().get());
+        this.specialDefence = new DoubleWritable(pokemon.getSpecialDefence().get());
+        this.speed = new DoubleWritable(pokemon.getSpeed().get());
     }
 
     public Text getNumber() {
@@ -153,7 +166,7 @@ public class Pokemon implements Writable {
     }
 
     public static Comparator<Pokemon> AttackComparator = new Comparator<Pokemon>() {
-
+        @Override
         public int compare(Pokemon o1, Pokemon o2) {
 
             return (int) (o2.getAttack().get() - o1.getAttack().get());
@@ -161,7 +174,7 @@ public class Pokemon implements Writable {
     };
 
     public static Comparator<Pokemon> DefenceComparator = new Comparator<Pokemon>() {
-
+        @Override
         public int compare(Pokemon o1, Pokemon o2) {
 
             return (int) (o2.getDefence().get() - o1.getDefence().get());
@@ -169,7 +182,7 @@ public class Pokemon implements Writable {
     };
 
     public static Comparator<Pokemon> HPComparator = new Comparator<Pokemon>() {
-
+        @Override
         public int compare(Pokemon o1, Pokemon o2) {
 
             return (int) (o2.getHp().get() - o1.getHp().get());
@@ -177,7 +190,7 @@ public class Pokemon implements Writable {
     };
 
     public static Comparator<Pokemon> SpeedComparator = new Comparator<Pokemon>() {
-
+        @Override
         public int compare(Pokemon o1, Pokemon o2) {
 
             return (int) (o2.getSpeed().get() - o1.getSpeed().get());
