@@ -1,6 +1,12 @@
 package ru.vsu.bigdata.task1;
 
+import org.apache.hadoop.io.NullWritable;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mrunit.mapreduce.MapReduceDriver;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.junit.Test;
+
+import java.io.IOException;
 
 //TODO Необходимо создать еще один вспомогательный класс TestUtils
 //TODO В классе TestUtils реализовать статические методы: чтение/запись данных из/в файл
@@ -9,8 +15,11 @@ import org.junit.Test;
 public class PokemonTest {
 
     @Test
-    public void test() {
-
+    public void test() throws IOException, InvalidFormatException {
+        MapReduceDriver<NullWritable,Pokemon,Text,Pokemon,Text,Text>  mapReduceDriver =
+                new MapReduceDriver(new PokemonMapper(),new PokemonReducer());
+        mapReduceDriver.addAll(FileUtils.readXlsx());
+        FileUtils.writeCsv(mapReduceDriver.run());
     }
 
 }
