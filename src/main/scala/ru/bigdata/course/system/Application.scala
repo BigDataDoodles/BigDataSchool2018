@@ -1,10 +1,16 @@
 package ru.bigdata.course.system
 
+import org.apache.spark.rdd.RDD
+import org.apache.spark.sql.types._
+import org.apache.spark.sql.{Row, SparkSession}
 import org.apache.spark.{SparkConf, SparkContext}
+import ru.bigdata.course.utils._
+
 
 /**
   * Created by gennady on 01/03/18.
   */
+
 object Application extends App {
 
   val conf = new SparkConf()
@@ -13,24 +19,35 @@ object Application extends App {
   val sc = new SparkContext(conf)
   sc.setLogLevel("ERROR")
 
-
   val stopwordsInputRu = sc.textFile("./src/main/resources/stop-words-russian.txt")
   val stopwordsInputEn = sc.textFile("./src/main/resources/stop-words-english.txt")
   val stopwordsRu = processStopwords(stopwordsInputRu)
   val stopwordsEn = processStopwords(stopwordsInputEn)
   val stopwords = stopwordsEn.union(stopwordsRu)
 
-  val author1 = sc.textFile("./src/main/resources/oxxy.txt")
-  val author2 = sc.textFile("./src/main/resources/slava.txt")
-  val words_author1 = processCorpus(author1, stopwords)
-  val words_author2 = processCorpus(author2, stopwords)
+  val obscene = processStopwords(sc.textFile("./src/main/resources/swear-words-russian.txt"))
 
-  println("Vocabulary Sizes")
-  println(words_author1.count(), words_author2.count())
+  val corpus_author1 = sc.textFile("./src/main/resources/oxxxy.txt")
+  val corpus_author2 = sc.textFile("./src/main/resources/slava.txt")
 
-  words_author1.filter(_._2 > 5).foreach(pair => println(pair))
-  //words_author1.sortByKey().
-  //words_author1.subtractByKey(words_author2).saveAsTextFile("./src/main/resources/results.txt")
-  //words_author1.saveAsTextFile("./src/main/resources/author1.txt")
+  val stats1 = getStats("Oxxxymiron",corpus_author1,stopwords,obscene)
+  val stats2 = getStats("Slava KPSS",corpus_author2,stopwords,obscene)
+
+  val row1 = Row.fromSeq(stats1)
+  val row2 = Row.fromSeq(stats2)
+  val rdd = sc.makeRDD(List(row1,row2))
+  val fields = List(
+    StructField("Name", StringType, nullable = false),
+    StructField("Total", LongType, nullable = false),
+    StructField("Cleaned", StringType, nullable = false),
+    StructField("Cyrillic",  StringType,nullable = false),
+    StructField("Latin",  StringType, nullable = false),
+    StructField("Obscene", StringType, nullable = false)
+  )
+  val spark = SparkSession.builder().getOrCreate()
+  import spark.implicits._
+  val ds = spark.createDataFrame(rdd, StructType(fields))
+  ds.show()
+
 
 }
