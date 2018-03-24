@@ -1,4 +1,6 @@
 let fs = require("fs");
+let kafka = require("kafka-node");
+
 /* 
 * required:
 * _id, timestamp, device_platform, http_referrer,  item, quantity,  value
@@ -11,7 +13,10 @@ let platforms = platformsJson["userAgents"].map(element =>{
     return element.deviceName + "-" +element.value;
  })
 
- //global
+ let client = new kafka.Client(config.output.kafka.host+":"+config.output.kafka.port+"/")
+let producer = new kafka.Producer(client);
+
+
  var _id = 1;
  var csv = [];
  var quantities = [0];
@@ -34,7 +39,7 @@ function _init(){
     }
     //console.log(csv.length);
     //writeToCSV(csv);
-    writeToKafka(csv)
+    writeToKafka()
 }
 
 function writeToCSV(){
@@ -45,10 +50,6 @@ function writeToCSV(){
     fs.writeFileSync(config.output.fs.path + "/" +config.output.fs.file,arguments[0]);
 }
 function writeToKafka(){
-    let recordsArray = arguments[0];
-    let kafka = require("kafka-node");
-    let client = new kafka.Client(config.output.kafka.host+":"+config.output.kafka.port)
-    let producer = new kafka.Producer(client);
     handleRecord(0);
     producer.on('ready', function () {
         console.log("Producer is ready");
@@ -56,33 +57,33 @@ function writeToKafka(){
     producer.on('error', function (err) {
         console.error("Problem with producing Kafka message "+err);
     })
-    function handleRecord(currentRecord) {   
-        let line = recordsArray[currentRecord];
-        let record = ""
-        for (var i in line) {
-            record += (i)?config.csv.delimiter:"";
-            record += line[i];
+}
+function handleRecord(currentRecord) {   
+    let line = csv[currentRecord];
+    var record = ""
+    for (var i in line) {
+        record += (i>0)?config.csv.delimiter:"";
+        record += line[i] ;
+    }
+     console.log({"key": "_id_"+line[config.csv.key], "value": record});
+
+     produceRecordMessage("_id_"+line[config.csv.key],record)
+     let delay = config.output.kafka.timer.delay.avg + (Math.random() -0.5) * config.output.kafka.timer.delay.spread;
+     setTimeout(handleRecord.bind(null, cycleIndex(currentRecord,csv)), delay);
+}
+function produceRecordMessage(key,record) {
+    let KeyedMessage = kafka.KeyedMessage,
+    recordKM = new KeyedMessage(key, record),
+    payloads = [
+        { topic: config.output.kafka.topic, messages: recordKM, partition: 0 },
+    ];
+    producer.send(payloads, (err, data) => {
+        if(typeof(data) !== "undefined")
+            console.log(data)
+        else {
+            console.log(err["message"])
         }
-         console.log({"key": line[config.csv.key], "value": record});
-    
-         produceRecordMessage(line[config.csv.key],record)
-         let delay = config.output.kafka.timer.delay.avg + (Math.random() -0.5) * config.output.kafka.timer.delay.spread;
-         setTimeout(handleRecord.bind(null, cycleIndex(currentRecord,recordsArray)), delay);
-    }
-    function produceRecordMessage(key,record) {
-        let KeyedMessage = kafka.KeyedMessage,
-        recordKM = new KeyedMessage(key, record),
-        payloads = [
-            { topic: config.output.kafka.topic, messages: recordKM, partition: 0 },
-        ];
-        producer.send(payloads, (err, data) => {
-            if(typeof(data) !== "undefined")
-                console.log(data)
-            else {
-                console.log(err["message"])
-            }
-        });
-    }
+    });
 }
 function addToCSVRandomRecord(stockElement){
     let refereesIndex = Math.floor(Math.random()*10) % refereesJson.links.length; 
