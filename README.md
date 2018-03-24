@@ -19,3 +19,14 @@ The systems create statistics for a web shop selling phones
     3. SPARK Streaming используется для подсчета общего количества переходов по реферальным ссылкам в данный момент  
     4. Периодический анализ и выявление фейковых переходов и процент эффективных пользователей, выявлять тенденции у пользователей, вычислять коэффициент полезности рекламы у конкретного распространителя   
     
+    Running Programs:  
+    1. start Zookeeper and Kafka 
+    2. to stream pipe data build the with mvn the Pipe program: mvn clean package  
+        mvn exec:java -Dexec.mainClass="bigdata.project.Pipe"  
+       run the listener for the pipe  
+       /path/to/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic clients-purchases-output  
+       run the purchases simulator
+       node /path/to/clients-simulator/index.js  
+       watch the csv rows piped to Kafka
+      
+        
