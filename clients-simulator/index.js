@@ -18,12 +18,11 @@ let producer = new kafka.Producer(client);
 
 
  var _id = 1;
- var csv = [];
+ var Csv = [];
  var quantities = [0];
 for (var i = 0; i < config.purchases.iterations;){
     quantities.push (++i)
 }
- //end of global
 
 
  _init();
@@ -31,23 +30,25 @@ for (var i = 0; i < config.purchases.iterations;){
 function _init(){    
     let stockJson = JSON.parse(fs.readFileSync(config.stock.path));    
     let max_i = config.purchases.max;
-    var i = 0; // max_i*stocks.electronics.phones = num rows in csv
+    var i = 0; // max_i*stocks.electronics.phones = num rows in Csv
     while (i++ < max_i){
         for (var k in stockJson){
-            stockJson[k].forEach(addToCSVRandomRecord);
+            stockJson[k].forEach(addToJsonRandomRecord);
         }
     }
-    //console.log(csv.length);
-    //writeToCSV(csv);
+    //writeToJson(Csv);
     writeToKafka()
 }
 
-function writeToCSV(){
+function writeToJson(){
     if(!arguments[0])
         return;
-    let data = arguments[0]
+    var data = arguments[0];
+    /*for (var i in arguments[0]){
+        data += arguments[0] + "\n";
+    }*/
+    fs.writeFileSync(config.output.fs.path + "/" +config.output.fs.file,data);
 
-    fs.writeFileSync(config.output.fs.path + "/" +config.output.fs.file,arguments[0]);
 }
 function writeToKafka(){
     handleRecord(0);
@@ -59,23 +60,21 @@ function writeToKafka(){
     })
 }
 function handleRecord(currentRecord) {   
-    let line = csv[currentRecord];
+    let line = Csv[currentRecord];
     var record = ""
     for (var i in line) {
-        record += (i>0)?config.csv.delimiter:"";
+        record += (i>0)?config.Csv.delimiter:"";
         record += line[i] ;
     }
-     console.log({"key": "_id_"+line[config.csv.key], "value": record});
+     console.log(record);
 
-     produceRecordMessage("_id_"+line[config.csv.key],record)
+     produceRecordMessage(record)
      let delay = config.output.kafka.timer.delay.avg + (Math.random() -0.5) * config.output.kafka.timer.delay.spread;
-     setTimeout(handleRecord.bind(null, cycleIndex(currentRecord,csv)), delay);
+     setTimeout(handleRecord.bind(null, cycleIndex(currentRecord,Csv)), delay);
 }
-function produceRecordMessage(key,record) {
-    let KeyedMessage = kafka.KeyedMessage,
-    recordKM = new KeyedMessage(key, record),
+function produceRecordMessage(record) {
     payloads = [
-        { topic: config.output.kafka.topic, messages: recordKM, partition: 0 },
+        { topic: config.output.kafka.topic, messages: record, partition: 0 },
     ];
     producer.send(payloads, (err, data) => {
         if(typeof(data) !== "undefined")
@@ -85,14 +84,32 @@ function produceRecordMessage(key,record) {
         }
     });
 }
-function addToCSVRandomRecord(stockElement){
+function addToJsonRandomRecord(stockElement){
     let refereesIndex = Math.floor(Math.random()*10) % refereesJson.links.length; 
     let platformsIndex = Math.floor(Math.random()*10) % platforms.length; 
-    let quantityIndex = Math.floor(Math.random()*10) % 3;
+    let quantityIndex = Math.floor(Math.random()*10) % 2;
 
     let timestamp = getRandomTime(true);
     _id += 1;
-    csv.push(Array(_id,timestamp,platforms[platformsIndex].replace(",","-"), refereesJson.links[refereesIndex],stockElement.name,quantities[quantityIndex],stockElement.price));
+    
+    /*Csv.push(
+        {
+            "_id": _id,
+            "timestamp" : timestamp,
+            "platform" : platforms[platformsIndex].replace(",","-"), "referer":refereesJson.links[refereesIndex],
+            "item":stockElement.name,
+            "quantity": quantities[quantityIndex],
+            "price": stockElement.price
+    });*/
+    Csv.push(Array(
+        _id,
+        timestamp,
+        platforms[platformsIndex].replace(",","-"),
+        refereesJson.links[refereesIndex],
+        stockElement.name,
+        quantities[quantityIndex],
+        stockElement.price
+    ))
 
 }
 function getRandomTime(){
