@@ -6,7 +6,7 @@ import org.apache.spark.{SparkConf, SparkContext}
 
 object Application extends App {
 
-  val sc = new SparkContext(new SparkConf().setMaster("local[2]"))
+  val sc = new SparkContext(new SparkConf().setMaster("local[2]").setAppName("app"))
 
   val pathToExtractedWords = "./src/main/resources/extracted_words.txt"
 
@@ -16,8 +16,10 @@ object Application extends App {
 
   var song_1: RDD[String] = sc.textFile(pathToSongOX).flatMap(_.split(" "))
 
-  println(Utils.checkSense(song_1) + " слов песни содержат смысл")
+  song_1.map(_.replaceAll("[^а-яА-Я]", "")).foreach(println)
 
+  val result = Utils.checkSense(song_1) + " часть слов песни содержат смысл"
+  println(result)
   sc.stop()
 }
 
